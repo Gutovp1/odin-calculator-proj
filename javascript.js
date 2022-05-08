@@ -1,4 +1,5 @@
 let displayValue = 0
+const buttonsArray = ['+','-','*','/'];
 
 function clear(){
     displayValue = 0;
@@ -28,6 +29,15 @@ numButtons.forEach( btn => btn.addEventListener('click',() => {
     disp.textContent = btn.textContent;
 }));
 
-// numButton.addEventListener('click',() => {
-//     display.textContent = numButton.textContent;
-// });
+const opeButtons = document.querySelectorAll('.opeBtn');
+opeButtons.forEach( btn => btn.addEventListener('click',() => {
+    disp.textContent = btn.textContent;
+}));
+
+window.addEventListener('keydown',(e) => {
+    //if(buttonsArray.includes(e.key))
+    if(buttonsArray.includes(e.key) || Number(e.key))
+        disp.textContent = e.key;
+    console.log((Number(e.key)));
+});
+
