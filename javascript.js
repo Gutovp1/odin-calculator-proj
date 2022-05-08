@@ -21,5 +21,13 @@ function divide(a,b){
     return a/b;
 }
 
-const display = document.getElementById('display');
+const disp = document.getElementById('display');
 
+const numButtons = document.querySelectorAll('.numBtn');
+numButtons.forEach( btn => btn.addEventListener('click',() => {
+    disp.textContent = btn.textContent;
+}));
+
+// numButton.addEventListener('click',() => {
+//     display.textContent = numButton.textContent;
+// });
