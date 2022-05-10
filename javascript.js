@@ -1,13 +1,13 @@
-let displayValue = 0;
+//let displayValue = 0;
 const buttonsArray = ['+','-','*','/'];
-let previousOperand = 0;
-let currentOperand = 0;
+let previousOperand = "";
+let currentOperand = "";
 let operator = "";
 
 function clear(){
     disp.textContent = "";
-    previousOperand = 0;
-    currentOperand = 0;
+    previousOperand = "";
+    currentOperand = "";
     operator = "";    
 }
 
@@ -24,9 +24,44 @@ function multiply(a,b){
 }
 
 function divide(a,b){
+    if(b == 0)
+    {
+        return "Division by zero. =(";
+    }
     return a/b;
 }
 
+function evaluate(ope, num1, num2){
+    let result;
+    result ="";
+    switch (ope)
+    {
+        case("+"): 
+            result = add(num1,num2);
+        break;
+        case("-"): 
+            result = subtract(num1,num2);
+        break;
+        case("*"): 
+            result = multiply(num1,num2);
+        break;
+        case("/"): 
+            result = divide(num1,num2);
+        break;
+        default:
+        break;
+
+    }
+    if(result != "")
+    {
+        console.log(result);
+        disp.textContent = result;
+        previousOperand = result;
+        currentOperand = "";
+        operator = "";
+        return result;
+    }
+}
 const disp = document.getElementById('display');
 const numButtons = document.querySelectorAll('.numBtn');
 const opeButtons = document.querySelectorAll('.opeBtn');
@@ -45,22 +80,27 @@ numButtons.forEach( btn => btn.addEventListener('click',() => {
     {
         disp.textContent = disp.textContent.replace(operator,"");
         disp.textContent += btn.textContent;
-        currentOperand = Number(disp.textContent);
-         
+        currentOperand = Number(disp.textContent); 
+        console.log(currentOperand);        
     }
 }));
 
 opeButtons.forEach( btn => btn.addEventListener('click',() => {
     disp.textContent = btn.textContent;
     operator = btn.textContent;
+    console.log(operator);
 }));
 
-// equButton.addEventListener('click', () => {
-//     if(currentOperand && previousOperand)
-//         disp.textContent = currentOperand; 
-// });
 
 aclButton.addEventListener('click', () =>  clear() );
+
+equButton.addEventListener('click', () => {
+    if(currentOperand && previousOperand)
+    {
+        evaluate(operator,previousOperand,currentOperand); 
+    }
+});
+
 
 // window.addEventListener('keydown',(e) => {
 //     if(buttonsArray.includes(e.key) || Number(e.key))
