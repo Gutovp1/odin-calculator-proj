@@ -1,5 +1,5 @@
-//let displayValue = 0;
 const buttonsArray = ['+','-','*','/'];
+let equalPressed = false;
 let previousOperand = "";
 let currentOperand = "";
 let operator = "";
@@ -11,17 +11,11 @@ function clear(){
     operator = "";    
 }
 
-function add(a, b){
-    return a+b;
-}
+function add(a, b) { return a+b; }
 
-function subtract(a,b){
-    return a-b;
-}
+function subtract(a, b) { return a-b; }
 
-function multiply(a,b){
-    return a*b;
-}
+function multiply(a, b) { return a*b; }
 
 function divide(a,b){
     if(b == 0)
@@ -55,12 +49,12 @@ function evaluate(ope, num1, num2){
     }
     if(typeof result == "number")
     {
+        clear();
         previousOperand = result;
-        currentOperand = "";
-        operator = "";
-        return result;
+        return previousOperand;
     }
 }
+
 const disp = document.getElementById('display');
 const numButtons = document.querySelectorAll('.numBtn');
 const opeButtons = document.querySelectorAll('.opeBtn');
@@ -71,23 +65,38 @@ const aclButton = document.querySelector('.aclBtn');
 numButtons.forEach( btn => btn.addEventListener('click',() => {
     if(operator == "")
     {
-        disp.textContent += btn.textContent;
+        if (equalPressed)
+        {
+            disp.textContent = btn.textContent;
+            equalPressed = false;
+        }
+        else
+        {
+            disp.textContent += btn.textContent;
+        }
         previousOperand = Number(disp.textContent);
-        alert(previousOperand);
     }
     else 
     {
-        disp.textContent = disp.textContent.replace(operator,"");
+        disp.textContent = "";//refresh the display to avoid putting the operator in the second operand
         disp.textContent += btn.textContent;
-        currentOperand = Number(disp.textContent); 
-        alert(previousOperand + operator + currentOperand);      
+        currentOperand = Number(disp.textContent);    
     }
 }));
 
 opeButtons.forEach( btn => btn.addEventListener('click',() => {
-    disp.textContent = btn.textContent;
-    operator = btn.textContent;
-    console.log(operator);
+    //update the display with the result every time two numbers and an operator are typed  
+    if(typeof currentOperand == "number" && typeof previousOperand == "number")
+    {
+        previousOperand = evaluate(operator, previousOperand, currentOperand);
+        operator = btn.textContent;
+        disp.textContent = previousOperand;
+    }
+    else 
+    {
+        operator = btn.textContent;
+        disp.textContent = operator;
+    }
 }));
 
 
@@ -97,6 +106,7 @@ equButton.addEventListener('click', () => {
     if(typeof currentOperand == "number" && typeof previousOperand == "number")
     {
         disp.textContent = evaluate(operator,previousOperand,currentOperand); 
+        equalPressed = true;
     }
 });
 
