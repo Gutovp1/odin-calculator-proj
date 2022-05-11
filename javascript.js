@@ -26,7 +26,7 @@ function multiply(a,b){
 function divide(a,b){
     if(b == 0)
     {
-        return "Division by zero. =(";
+        return "";
     }
     return a/b;
 }
@@ -49,13 +49,12 @@ function evaluate(ope, num1, num2){
             result = divide(num1,num2);
         break;
         default:
+            return "";
         break;
 
     }
-    if(result != "")
+    if(typeof result == "number")
     {
-        console.log(result);
-        disp.textContent = result;
         previousOperand = result;
         currentOperand = "";
         operator = "";
@@ -74,14 +73,14 @@ numButtons.forEach( btn => btn.addEventListener('click',() => {
     {
         disp.textContent += btn.textContent;
         previousOperand = Number(disp.textContent);
-        console.log(previousOperand);
+        alert(previousOperand);
     }
     else 
     {
         disp.textContent = disp.textContent.replace(operator,"");
         disp.textContent += btn.textContent;
         currentOperand = Number(disp.textContent); 
-        console.log(currentOperand);        
+        alert(previousOperand + operator + currentOperand);      
     }
 }));
 
@@ -95,9 +94,9 @@ opeButtons.forEach( btn => btn.addEventListener('click',() => {
 aclButton.addEventListener('click', () =>  clear() );
 
 equButton.addEventListener('click', () => {
-    if(currentOperand && previousOperand)
+    if(typeof currentOperand == "number" && typeof previousOperand == "number")
     {
-        evaluate(operator,previousOperand,currentOperand); 
+        disp.textContent = evaluate(operator,previousOperand,currentOperand); 
     }
 });
 
