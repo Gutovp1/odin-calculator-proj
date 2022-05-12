@@ -128,7 +128,12 @@ decButton.addEventListener('click',() => {
 });
 
 bkpButton.addEventListener('click', () => {
-    
+    display = disp.textContent;
+    disp.textContent = display.slice(0,display.length-1);
+    if(typeof currentOperand == 'number')
+        currentOperand = Number(disp.textContent);
+    else
+        previousOperand = Number(disp.textContent);
 });
 
 // window.addEventListener('keydown',(e) => {
