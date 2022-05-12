@@ -1,5 +1,5 @@
 const buttonsArray = ['+','-','*','/'];
-let equalPressed = false;
+let evaluatePair = false;
 let previousOperand = "";
 let currentOperand = "";
 let operator = "";
@@ -51,6 +51,7 @@ function evaluate(ope, num1, num2){
     {
         clear();
         previousOperand = result;
+        evaluatePair = true;
         return previousOperand;
     }
 }
@@ -65,10 +66,10 @@ const aclButton = document.querySelector('.aclBtn');
 numButtons.forEach( btn => btn.addEventListener('click',() => {
     if(operator == "")
     {
-        if (equalPressed)
+        if (evaluatePair)
         {
             disp.textContent = btn.textContent;
-            equalPressed = false;
+            evaluatePair = false;
         }
         else
         {
@@ -78,8 +79,16 @@ numButtons.forEach( btn => btn.addEventListener('click',() => {
     }
     else 
     {
-        disp.textContent = "";//refresh the display to avoid putting the operator in the second operand
-        disp.textContent += btn.textContent;
+        if (evaluatePair)
+        {
+            disp.textContent = btn.textContent;
+            evaluatePair = false;
+        }
+        else
+        {
+            disp.textContent = disp.textContent.replace(operator,"");
+            disp.textContent += btn.textContent;
+        }
         currentOperand = Number(disp.textContent);    
     }
 }));
@@ -106,7 +115,6 @@ equButton.addEventListener('click', () => {
     if(typeof currentOperand == "number" && typeof previousOperand == "number")
     {
         disp.textContent = evaluate(operator,previousOperand,currentOperand); 
-        equalPressed = true;
     }
 });
 

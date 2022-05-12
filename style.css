@@ -16,7 +16,10 @@ body{
     display: flex;
     max-width: 400px;
     flex-wrap: wrap;
-   
+}
+
+button:hover {
+    background-color:gray;
 }
 
 button {
@@ -29,6 +32,13 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.opeBtn{
+    background-color: orange;
+}
+
+.equBtn{
+    background-color: rgb(47, 46, 48);
 }
 
 #display{
