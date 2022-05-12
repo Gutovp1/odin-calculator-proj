@@ -1,5 +1,6 @@
 const buttonsArray = ['+','-','*','/'];
 let evaluatePair = false;
+let decimalOn = false;
 let previousOperand = "";
 let currentOperand = "";
 let operator = "";
@@ -61,7 +62,8 @@ const numButtons = document.querySelectorAll('.numBtn');
 const opeButtons = document.querySelectorAll('.opeBtn');
 const equButton = document.querySelector('.equBtn');
 const aclButton = document.querySelector('.aclBtn');
-
+const decButton = document.querySelector('.decBtn');
+const bkpButton = document.querySelector('.bkpBtn');
 
 numButtons.forEach( btn => btn.addEventListener('click',() => {
     if(operator == "")
@@ -118,6 +120,16 @@ equButton.addEventListener('click', () => {
     }
 });
 
+decButton.addEventListener('click',() => {
+    if(typeof Number(disp.textContent) == 'number' && !disp.textContent.includes('.'))
+    {
+        disp.textContent += ".";
+    }
+});
+
+bkpButton.addEventListener('click', () => {
+    
+});
 
 // window.addEventListener('keydown',(e) => {
 //     if(buttonsArray.includes(e.key) || Number(e.key))
