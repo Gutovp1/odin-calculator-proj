@@ -10,6 +10,7 @@ body{
     border: 5px solid darkslategray;
     border-radius: 1em;
     font-size: 15px;
+    box-shadow: 10px 10px 10px black;
 }
 
 #buttons {
@@ -56,4 +57,5 @@ button {
     padding: 10px;
     border-radius: 0.2em;
     border: 5px solid darkslategray;
+    box-shadow: 3px 3px gray;
 }
