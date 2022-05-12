@@ -34,11 +34,13 @@ button {
     align-items: center;
 }
 .opeBtn{
-    background-color: orange;
+    background-color: darkorange;
 }
 
-.equBtn{
-    background-color: rgb(47, 46, 48);
+.equBtn, .aclBtn{
+    /* background-color: rgb(47, 46, 48); */
+    background-color: rgb(114, 38, 38);
+    width : 200px;
 }
 
 #display{
